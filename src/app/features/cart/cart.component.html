@@ -1,0 +1,58 @@
+<div class="cart-page">
+  <div class="page-header">
+    <h1>Shopping Cart</h1>
+    <span class="item-count" *ngIf="itemCount$ | async as count">{{ count }} item(s)</span>
+  </div>
+
+  <!-- Empty Cart -->
+  <div class="empty-cart" *ngIf="isEmpty$ | async">
+    <div class="empty-icon">🛒</div>
+    <h2>Your cart is empty</h2>
+    <p>Add some products to get started!</p>
+    <a routerLink="/products" class="btn-shop">Start Shopping</a>
+  </div>
+
+  <!-- Cart Content -->
+  <div class="cart-content" *ngIf="!(isEmpty$ | async)">
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of items$ | async">
+        <img [src]="item.product.image" [alt]="item.product.title" class="item-image" />
+        <div class="item-details">
+          <a [routerLink]="['/products', item.product.id]" class="item-title">{{ item.product.title }}</a>
+          <span class="item-category">{{ item.product.category }}</span>
+          <span class="item-price">${{ item.product.price | number:'1.2-2' }}</span>
+        </div>
+        <div class="quantity-controls">
+          <button class="qty-btn" (click)="onUpdateQuantity(item.product.id, item.quantity - 1)">−</button>
+          <span class="qty-value">{{ item.quantity }}</span>
+          <button class="qty-btn" (click)="onUpdateQuantity(item.product.id, item.quantity + 1)">+</button>
+        </div>
+        <div class="item-subtotal">
+          ${{ (item.product.price * item.quantity) | number:'1.2-2' }}
+        </div>
+        <button class="btn-remove" (click)="onRemoveItem(item.product.id)">🗑️</button>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>${{ total$ | async | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span class="free-shipping">FREE</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span>${{ total$ | async | number:'1.2-2' }}</span>
+      </div>
+      <button class="btn-checkout" (click)="onCheckout()">
+        Proceed to Checkout →
+      </button>
+      <button class="btn-clear" (click)="onClearCart()">Clear Cart</button>
+      <a routerLink="/products" class="btn-continue">← Continue Shopping</a>
+    </div>
+  </div>
+</div>

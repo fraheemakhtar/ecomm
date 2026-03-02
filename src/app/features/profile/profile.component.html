@@ -1,0 +1,35 @@
+<div class="profile-page" *ngIf="user$ | async as user">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar">{{ user.firstName[0] }}{{ user.lastName[0] }}</div>
+      <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+      <span class="role-badge" [class.admin]="user.role === 'admin'">{{ user.role | titlecase }}</span>
+      <p>{{ user.email }}</p>
+    </div>
+
+    <div class="profile-details">
+      <div class="detail-row">
+        <span class="label">First Name</span>
+        <span>{{ user.firstName }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Last Name</span>
+        <span>{{ user.lastName }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Email</span>
+        <span>{{ user.email }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">Role</span>
+        <span>{{ user.role | titlecase }}</span>
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <a routerLink="/products" class="btn-shop">Browse Products</a>
+      <a *ngIf="user.role === 'admin'" routerLink="/admin/dashboard" class="btn-admin">Admin Dashboard</a>
+      <button class="btn-logout" (click)="onLogout()">Logout</button>
+    </div>
+  </div>
+</div>

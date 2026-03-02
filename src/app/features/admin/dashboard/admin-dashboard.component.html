@@ -1,0 +1,47 @@
+<div class="admin-page">
+  <div class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <p>Manage your store</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of stats" [style.border-left-color]="stat.color">
+      <span class="stat-icon">{{ stat.icon }}</span>
+      <div class="stat-info">
+        <span class="stat-value">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-products">
+    <div class="section-header">
+      <h2>Products</h2>
+    </div>
+
+    <app-spinner *ngIf="loading$ | async"></app-spinner>
+
+    <div class="products-table" *ngIf="!(loading$ | async)">
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products$ | async">
+            <td><img [src]="product.image" [alt]="product.title" class="product-thumb" /></td>
+            <td><span class="product-title">{{ product.title }}</span></td>
+            <td><span class="category-tag">{{ product.category }}</span></td>
+            <td><strong>${{ product.price | number:'1.2-2' }}</strong></td>
+            <td>⭐ {{ product.rating.rate }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

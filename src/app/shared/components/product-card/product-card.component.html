@@ -1,0 +1,19 @@
+<div class="product-card" (click)="onViewDetail()">
+  <div class="product-image-wrapper">
+    <img [src]="product.image" [alt]="product.title" class="product-image" loading="lazy" />
+    <div class="product-overlay">
+      <button class="btn-view" (click)="onViewDetail()">View Details</button>
+    </div>
+  </div>
+  <div class="product-info">
+    <span class="category">{{ product.category }}</span>
+    <h3 class="title" [title]="product.title">{{ product.title }}</h3>
+    <app-rating [rate]="product.rating.rate" [count]="product.rating.count"></app-rating>
+    <div class="product-footer">
+      <span class="price">${{ product.price | number:'1.2-2' }}</span>
+      <button class="btn-cart" (click)="onAddToCart($event)">
+        🛒 Add to Cart
+      </button>
+    </div>
+  </div>
+</div>

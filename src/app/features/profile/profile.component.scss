@@ -1,0 +1,89 @@
+.profile-page {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e94560, #c73652);
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  h1 { font-size: 1.5rem; color: #1a1a2e; margin-bottom: 8px; }
+  p { color: #666; font-size: 0.95rem; }
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #e8f5e9;
+  color: #2e7d32;
+  margin-bottom: 8px;
+  &.admin { background: rgba(233,69,96,0.1); color: #e94560; }
+}
+
+.profile-details {
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px 0;
+  margin-bottom: 24px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 0.95rem;
+  .label { font-weight: 600; color: #444; }
+  span { color: #666; }
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  a, button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+  }
+
+  .btn-shop { background: #1a1a2e; color: white; }
+  .btn-admin { background: #e94560; color: white; }
+  .btn-logout {
+    background: transparent;
+    border: 1px solid #ddd !important;
+    color: #666;
+    &:hover { border-color: #e94560 !important; color: #e94560; }
+  }
+}

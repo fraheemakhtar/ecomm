@@ -1,0 +1,73 @@
+<div class="products-page">
+  <div class="page-header">
+    <h1>All Products</h1>
+    <p>Discover our amazing collection</p>
+  </div>
+
+  <div class="products-container">
+    <!-- Filters Sidebar -->
+    <aside class="filters-sidebar">
+      <div class="filter-section">
+        <h3>Search</h3>
+        <div class="search-group">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="applyFilter()"
+            placeholder="Search products..."
+            class="filter-input"
+          />
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Category</h3>
+        <div class="category-list">
+          <label class="category-item">
+            <input type="radio" name="category" value="" [(ngModel)]="selectedCategory" (change)="applyFilter()" />
+            <span>All Categories</span>
+          </label>
+          <label class="category-item" *ngFor="let cat of categories$ | async">
+            <input type="radio" name="category" [value]="cat" [(ngModel)]="selectedCategory" (change)="applyFilter()" />
+            <span>{{ cat | titlecase }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Sort By</h3>
+        <select [(ngModel)]="sortBy" (change)="applyFilter()" class="filter-select">
+          <option value="">Default</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Best Rating</option>
+        </select>
+      </div>
+
+      <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+    </aside>
+
+    <!-- Products Grid -->
+    <main class="products-main">
+      <app-spinner *ngIf="loading$ | async"></app-spinner>
+
+      <ng-container *ngIf="!(loading$ | async)">
+        <div class="results-info" *ngIf="products$ | async as products">
+          {{ products.length }} product(s) found
+        </div>
+
+        <div class="products-grid" *ngIf="products$ | async as products">
+          <app-product-card
+            *ngFor="let product of products"
+            [product]="product"
+            (viewDetail)="onViewProduct($event)"
+          ></app-product-card>
+        </div>
+
+        <div class="no-products" *ngIf="(products$ | async)?.length === 0">
+          <p>No products found. <button (click)="clearFilters()" class="link-btn">Clear filters</button></p>
+        </div>
+      </ng-container>
+    </main>
+  </div>
+</div>
