@@ -1,0 +1,77 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge">New Arrivals 2024</span>
+    <h1>Discover Amazing<br><span class="highlight">Products</span> Online</h1>
+    <p>Shop thousands of products with fast delivery, secure payment, and easy returns.</p>
+    <div class="hero-actions">
+      <a routerLink="/products" class="btn-primary">Shop Now</a>
+      <a routerLink="/auth/register" class="btn-secondary">Join Free</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">10k+</span><span>Products</span></div>
+      <div class="stat"><span class="stat-num">50k+</span><span>Customers</span></div>
+      <div class="stat"><span class="stat-num">4.8★</span><span>Rating</span></div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="hero-circle">
+      <span class="hero-emoji">🛍️</span>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features-section">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-card" *ngFor="let feature of features">
+        <span class="feature-icon">{{ feature.icon }}</span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="categories-section">
+  <div class="container">
+    <h2>Shop by Category</h2>
+    <div class="categories-grid" *ngIf="categories$ | async as categories">
+      <div class="category-card" *ngFor="let cat of categories" (click)="onCategoryClick(cat)">
+        <span class="cat-emoji">{{ getCategoryEmoji(cat) }}</span>
+        <span class="cat-name">{{ cat | titlecase }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="products-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured Products</h2>
+      <a routerLink="/products" class="see-all">See all →</a>
+    </div>
+
+    <app-spinner *ngIf="loading$ | async"></app-spinner>
+
+    <div class="products-grid" *ngIf="products$ | async as products">
+      <app-product-card
+        *ngFor="let product of getFeaturedProducts(products)"
+        [product]="product"
+        (viewDetail)="onViewProduct($event)"
+      ></app-product-card>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>Ready to Start Shopping?</h2>
+    <p>Join thousands of happy customers and get exclusive deals</p>
+    <a routerLink="/auth/register" class="btn-cta">Get Started Free</a>
+  </div>
+</section>

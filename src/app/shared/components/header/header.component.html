@@ -1,0 +1,42 @@
+<header class="header">
+  <div class="header-container">
+    <a routerLink="/" class="logo">
+      <span class="logo-icon">🛒</span>
+      <span class="logo-text">ShopNow</span>
+    </a>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search products..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()"
+        class="search-input"
+      />
+      <button (click)="onSearch()" class="search-btn">🔍</button>
+    </div>
+
+    <nav class="nav" [class.open]="menuOpen">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a routerLink="/cart" routerLinkActive="active" class="cart-link">
+        Cart
+        <span class="cart-badge" *ngIf="(cartItemCount$ | async)! > 0">
+          {{ cartItemCount$ | async }}
+        </span>
+      </a>
+
+      <ng-container *ngIf="isAuthenticated$ | async; else guestNav">
+        <a routerLink="/profile" routerLinkActive="active">Profile</a>
+        <a routerLink="/admin/dashboard" routerLinkActive="active" *ngIf="(currentUser$ | async)?.role === 'admin'">Admin</a>
+        <button class="btn-logout" (click)="onLogout()">Logout</button>
+      </ng-container>
+      <ng-template #guestNav>
+        <a routerLink="/auth/login" routerLinkActive="active">Login</a>
+        <a routerLink="/auth/register" routerLinkActive="active" class="btn-register">Register</a>
+      </ng-template>
+    </nav>
+
+    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+  </div>
+</header>

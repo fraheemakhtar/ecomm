@@ -1,0 +1,58 @@
+<div class="product-detail-page">
+  <app-spinner *ngIf="loading$ | async"></app-spinner>
+
+  <ng-container *ngIf="product$ | async as product">
+    <div class="breadcrumb">
+      <a routerLink="/">Home</a> /
+      <a routerLink="/products">Products</a> /
+      <span>{{ product.title }}</span>
+    </div>
+
+    <div class="product-detail">
+      <div class="product-image-section">
+        <img [src]="product.image" [alt]="product.title" class="detail-image" />
+      </div>
+
+      <div class="product-info-section">
+        <span class="category-badge">{{ product.category }}</span>
+        <h1 class="product-title">{{ product.title }}</h1>
+
+        <app-rating [rate]="product.rating.rate" [count]="product.rating.count"></app-rating>
+
+        <div class="price-section">
+          <span class="price">${{ product.price | number:'1.2-2' }}</span>
+          <span class="stock-badge">✅ In Stock</span>
+        </div>
+
+        <p class="description">{{ product.description }}</p>
+
+        <div class="quantity-section">
+          <label>Quantity:</label>
+          <div class="quantity-controls">
+            <button class="qty-btn" (click)="decrement()">−</button>
+            <span class="qty-value">{{ quantity }}</span>
+            <button class="qty-btn" (click)="increment()">+</button>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-add-cart" (click)="onAddToCart(product)" [class.added]="addedToCart">
+            {{ addedToCart ? '✅ Added to Cart!' : '🛒 Add to Cart' }}
+          </button>
+          <a routerLink="/cart" class="btn-checkout">Buy Now</a>
+        </div>
+
+        <div class="product-meta">
+          <div class="meta-item">
+            <span class="meta-label">Category:</span>
+            <span>{{ product.category | titlecase }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Rating:</span>
+            <span>{{ product.rating.rate }}/5 ({{ product.rating.count }} reviews)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
