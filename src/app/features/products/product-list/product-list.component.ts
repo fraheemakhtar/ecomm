@@ -12,6 +12,7 @@ import {
 } from '../../../store/products/products.selectors';
 
 @Component({
+  standalone: false,
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']

@@ -12,6 +12,7 @@ import {
 import { removeFromCart, updateQuantity, clearCart } from '../../store/cart/cart.actions';
 
 @Component({
+  standalone: false,
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']

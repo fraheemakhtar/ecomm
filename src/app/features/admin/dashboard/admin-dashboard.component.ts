@@ -6,6 +6,7 @@ import { loadProducts } from '../../../store/products/products.actions';
 import { selectAllProducts, selectProductsLoading } from '../../../store/products/products.selectors';
 
 @Component({
+  standalone: false,
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']

@@ -6,6 +6,7 @@ import { selectCurrentUser } from '../../store/auth/auth.selectors';
 import { logout } from '../../store/auth/auth.actions';
 
 @Component({
+  standalone: false,
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']

@@ -7,6 +7,7 @@ import { loadProducts, loadCategories, setFilter } from '../../store/products/pr
 import { selectAllProducts, selectCategories, selectProductsLoading } from '../../store/products/products.selectors';
 
 @Component({
+  standalone: false,
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']

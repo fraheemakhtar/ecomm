@@ -9,6 +9,7 @@ import { clearCart } from '../../store/cart/cart.actions';
 import { OrderService } from '../../core/services/order.service';
 
 @Component({
+  standalone: false,
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']

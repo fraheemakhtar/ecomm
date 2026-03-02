@@ -4,6 +4,7 @@ import { Product } from '../../../core/models/product.model';
 import { addToCart } from '../../../store/cart/cart.actions';
 
 @Component({
+  standalone: false,
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss']

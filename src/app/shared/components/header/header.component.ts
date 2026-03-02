@@ -8,6 +8,7 @@ import { logout } from '../../../store/auth/auth.actions';
 import { User } from '../../../core/models/user.model';
 
 @Component({
+  standalone: false,
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']

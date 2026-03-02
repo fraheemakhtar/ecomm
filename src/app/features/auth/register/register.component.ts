@@ -6,6 +6,7 @@ import { register } from '../../../store/auth/auth.actions';
 import { selectAuthLoading, selectAuthError } from '../../../store/auth/auth.selectors';
 
 @Component({
+  standalone: false,
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
