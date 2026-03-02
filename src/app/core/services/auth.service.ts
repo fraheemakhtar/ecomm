@@ -2,8 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { AuthResponse, LoginRequest, RegisterRequest, User } from '../models/user.model';
 import { environment } from '../../../environments/environment';
+
+interface JwtPayload {
+  exp: number;
+  sub?: string | number;
+  role?: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -62,13 +69,17 @@ export class AuthService {
   }
 
   private getUserFromStorage(): User | null {
-    const userStr = localStorage.getItem(this.USER_KEY);
-    return userStr ? JSON.parse(userStr) : null;
+    try {
+      const userStr = localStorage.getItem(this.USER_KEY);
+      return userStr ? JSON.parse(userStr) : null;
+    } catch {
+      return null;
+    }
   }
 
   private isTokenExpired(token: string): boolean {
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      const payload = jwtDecode<JwtPayload>(token);
       return payload.exp < Date.now() / 1000;
     } catch {
       return true;

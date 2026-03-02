@@ -85,7 +85,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       // Simulate payment processing
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      this.orderService.createOrder(this.cartItems, this.checkoutForm.value, 'mock_payment_intent_' + Date.now())
+      this.orderService.createOrder(this.cartItems, this.checkoutForm.value, `mock_payment_intent_${Date.now()}`)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (order) => {

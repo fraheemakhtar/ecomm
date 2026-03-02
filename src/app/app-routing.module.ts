@@ -19,23 +19,22 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
-    loadChildren: () => import('./features/checkout/checkout.module').then(m => m.CheckoutModule),
-    canLoad: [AuthGuard]
+    loadChildren: () => import('./features/checkout/checkout.module').then(m => m.CheckoutModule)
   },
   {
     path: 'auth',
-    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule),
-    canLoad: [GuestGuard]
+    canActivate: [GuestGuard],
+    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'profile',
-    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule),
-    canLoad: [AuthGuard]
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
   },
   {
     path: 'admin',
-    loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule),
-    canLoad: [AdminGuard]
+    canActivate: [AdminGuard],
+    loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)
   },
   { path: '**', redirectTo: '' }
 ];
@@ -45,4 +44,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 

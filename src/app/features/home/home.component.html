@@ -40,9 +40,7 @@
     <h2>Shop by Category</h2>
     <div class="categories-grid" *ngIf="categories$ | async as categories">
       <div class="category-card" *ngFor="let cat of categories" (click)="onCategoryClick(cat)">
-        <span class="cat-emoji">
-          {{ cat === 'electronics' ? '📱' : cat === 'jewelery' ? '💎' : cat.includes("women") ? '👗' : '👔' }}
-        </span>
+        <span class="cat-emoji">{{ getCategoryEmoji(cat) }}</span>
         <span class="cat-name">{{ cat | titlecase }}</span>
       </div>
     </div>

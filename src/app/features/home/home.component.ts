@@ -43,6 +43,16 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
+  getCategoryEmoji(category: string): string {
+    const emojiMap: Record<string, string> = {
+      electronics: '📱',
+      jewelery: '💎',
+      "women's clothing": '👗',
+      "men's clothing": '👔'
+    };
+    return emojiMap[category] || '🏷️';
+  }
+
   getFeaturedProducts(products: Product[]): Product[] {
     return products.slice(0, 8);
   }
